@@ -12,10 +12,12 @@ public class Main {
         int roll;
         int point;
         boolean playAgain = false;
-        boolean reroll = true;
+        boolean reroll = false;
 
         do
         {
+            System.out.println("New Game: Craps");
+            System.out.println("Rolling...");
             die1 = rnd.nextInt(6) + 1;
             die2 = rnd.nextInt(6) + 1;
             roll = die1 + die2;
@@ -53,9 +55,38 @@ public class Main {
                         else
                         {
                             System.out.println("You rolled " + roll + ". Trying again:");
+                            reroll = true;
                         }
                     }while (reroll);
             }
+            playAgain = getYNConfirm(in, "Would you like to play again? [Y/N]: ");
         }while(playAgain);
+    }
+    public static boolean getYNConfirm(Scanner pipe, String prompt)
+    {
+        boolean retYN = false;
+        boolean validInput = false;
+        String response;
+
+        do
+        {
+            System.out.print("\n" + prompt);
+            response = pipe.nextLine();
+            if(response.equalsIgnoreCase("Y"))
+            {
+                retYN = true;
+                validInput = true;
+            }
+            else if(response.equalsIgnoreCase("N"))
+            {
+                retYN = false;
+                validInput = true;
+            }
+            else
+            {
+                System.out.println("Invalid Input. Enter [Y/N]");
+            }
+        }while(!validInput);
+        return retYN;
     }
 }
